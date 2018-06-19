@@ -1,0 +1,393 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>3Dtest2</title>
+	  <link href = 'http://fonts.googleapis.com/css?family=Calligraffitti'
+         rel = 'stylesheet' type='text/css'>
+		<style>
+		 body { background-color: rgba(222, 241, 245,0.8); 
+			 text-align:center;
+		   }
+        input{display: none;
+          z-index: 1;
+	      top: 0px;
+	      left :0px;
+	      position: absolute;
+          }
+        label{
+        	display:block;
+        	width: 80px;
+        	height: 80px;
+        	line-height: 30px;
+        	border-radius: 50px;
+        	cursor: pointer;
+			margin-left : 50px;		
+			z-index:1;
+			position: absolute;
+        }
+		label img   {
+		    border-radius: 25px;
+		}
+		label img:hover  {
+		    box-shadow: 5px 5px 5px dimgrey; 
+		}
+        .btn{margin: 100px auto;z-index: 2;}
+
+        .view{
+        	perspective: 1000px;
+        	display: inline-block;
+        	width: 450px;
+        	height: 350px;
+			margin-top: 15px;
+			z-index :3;
+			position: absolute;
+			top :120px;
+			left :415;
+        }
+
+        .box{
+        	display: inline-block;
+        	width: 100%;
+        	height: 100%;
+	        position: absolute;
+	        text-align: center;
+	        transition: all 0.8s ease;
+	        transform-style: preserve-3d;/*设置其子元素3d属性*/
+			left :0;
+        }
+
+	    .face{
+	    	overflow: hidden;
+	        position: absolute;
+	    	background-color: #87BFC6;
+	    	line-height: 450px;
+	    	opacity: 0.96;
+	    }
+
+	    .box_front{
+	    	width: 450px;
+	    	height: 350px;
+	    	transform: translate3d(0,0,225px);
+			line-height: 100px;
+	    }
+
+	    .box_left{
+	    	width: 450px;
+	    	height: 350px;
+	    	transform: rotateX(-90deg) translate3d(0,0,225px);
+			line-height: 100px;
+	    	
+	    }
+
+	    .box_right{
+	    	width: 450px;
+	    	height: 350px;
+		    transform: rotateX(90deg) translate3d(0,0,225px);
+			line-height: 100px;
+	    }
+
+	    .box_top{
+	    	width: 450px;
+	    	height: 350px;
+	    	transform: rotateY(-90deg) translate3d(0,0,225px);
+			line-height: 100px;
+	    }
+	    
+	    .box_bottom{
+	    	width: 450px;
+	    	height: 350px;
+	    	transform: rotateY(90deg) translate3d(0,0,225px);
+			line-height: 100px;
+	    }
+	    
+	    .box_back{
+	    	width: 450px;
+	    	height: 350px;
+	    	transform: rotateY(180deg) translate3d(0,0,225px);
+			line-height: 100px;
+	    }
+	    div ul    {
+		    width: 450px;
+	    	height: 350px;
+			overflow-y: auto;
+		}
+  	    div ul li   {
+			display: inline-block;
+			top : -100;
+			right: 30;
+			position: relative;
+			
+	    }
+		h2 {
+		    display : none;
+		    font-family : Calligraffitti;
+		}
+		.hdisplay {
+		    display : block;
+			color :#87BFC6;
+		}
+		.imgOfBox{
+			position:relative; 
+			top:10px; 
+			left:10px;
+			right:10px;
+			float:left;
+			width :100%;
+			height: 100%;
+		}
+		.imgOfBox img{
+			opacity: 1.5;
+		}
+#left:checked ~ .view .box {transform: rotateY(90deg);}
+#right:checked ~ .view .box {transform: rotateY(-90deg);}
+#top:checked ~ .view .box {transform: rotateX(-90deg);}
+#bottom:checked ~ .view .box {transform: rotateX(90deg);}
+#back:checked ~ .view .box {transform: rotateY(180deg);}
+		</style>
+		 <script 
+	  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+        $("label").fadeIn(1000);
+		$("#views").fadeIn(2000);
+        });
+	  //console.log ("#views");
+	  $(function () {
+      $("label").mouseover(function () {
+        $("h2").attr("class","hdisplay");
+        });
+	  $("label").mouseout(function () {
+        $("h2").attr("class","");
+        });
+     $("label").click(function(){
+			$("#showa").hide(300);
+			$("#boxs").show();
+			$("#goback").show();
+	   });
+
+	   /*$("#imgOfBox1 img").click(function(){
+			$("#boxs").hide();
+			$("#showa").show();
+			$("#goback").hide();
+	   });*/
+	   $("#goback").click(function(){
+			location.href="test1.html";
+	   });
+	   $("#left").click(function(){
+	        $(".box_bottom ").css("z-index","1");
+			$(".box_bottom ").css("overflow-y","hidden");
+			$(".box_right ").css("z-index","1");
+			$(".box_right ").css("overflow-y","hidden");
+			$(".box_left ").css("z-index","1");
+			$(".box_left ").css("overflow-y","hidden");
+			$(".box_back ").css("z-index","1");
+			$(".box_back ").css("overflow-y","hidden");
+	        $(".box_front ").css("z-index","1");
+			$(".box_front ").css("overflow-y","hidden");
+			$(".box_top").css("overflow-y","auto");
+			$(".box_top").css("z-index","3");
+
+	   });
+	   $("#right").click(function(){
+	        $(".box_top ").css("z-index","1");
+			$(".box_top ").css("overflow-y","hidden");
+			$(".box_back ").css("z-index","1");
+			$(".box_back ").css("overflow-y","hidden");
+	        $(".box_front ").css("z-index","1");
+			$(".box_front ").css("overflow-y","hidden");
+			$(".box_bottom").css("overflow-y","auto");
+			$(".box_bottom").css("z-index","3");
+	   });
+	   $("#top").click(function(){
+	        $(".box_bottom ").css("z-index","1");
+			$(".box_bottom ").css("overflow-y","hidden");
+	        $(".box_left").css("z-index","1");
+			$(".box_left").css("overflow-y","hidden");
+			$(".box_back ").css("z-index","1");
+			$(".box_back ").css("overflow-y","hidden");
+	        $(".box_front ").css("z-index","1");
+			$(".box_front ").css("overflow-y","hidden");
+			$(".box_top").css("z-index","1");
+			$(".box_top").css("overflow-y","hidden");
+			$(".box_right").css("overflow-y","auto");
+			$(".box_right").css("z-index","3");
+	   });
+	   $("#bottom").click(function(){
+	        $(".box_bottom ").css("z-index","1");
+			$(".box_bottom ").css("overflow-y","hidden");
+			$(".box_back ").css("z-index","1");
+			$(".box_back ").css("overflow-y","hidden");
+	        $(".box_front ").css("z-index","1");
+			$(".box_front ").css("overflow-y","hidden");
+			$(".box_right ").css("z-index","1");
+			$(".box_right ").css("overflow-y","hidden");
+			$(".box_left").css("overflow-y","auto");
+			$(".box_left").css("z-index","3");
+	   });
+	   $("#front").click(function(){
+	        $(".box_back ").css("z-index","1");
+			$(".box_back ").css("overflow-y","hidden");
+	        $(".box_front ").css("z-index","3");
+			$(".box_front ").css("overflow-y","auto");
+	   });
+	   $("#back").click(function(){
+	        $(".box_front ").css("z-index","1");
+			$(".box_front ").css("overflow-y","hidden");
+	        $(".box_back ").css("z-index","3");
+			$(".box_back ").css("overflow-y","auto");
+	   });
+	});
+	/*var boxs=document.getElementById('box');
+    var x=0,y=0;
+    ////////////////////////鍵盤控制    
+    document.addEventListener('keydown', function(e){
+	    console.log (boxs.box);
+        boxs.box.webkitTransition='-webkit-transform 3s linear';
+        switch(e.keyCode){
+            case 37:    y -= 90;    //左箭頭
+                        break;
+            case 38:    x += 90;    //上箭頭
+                        break;
+            case 39:    y += 90;    //下箭頭
+                        break;
+            case 40:    x -= 90;    //右箭頭
+                        break;
+            
+        }
+		
+        boxs.box.webkitTransform = "rotateX("+x+"deg) rotateY("+y+"deg)"; //變換效果（沿X軸和Y軸旋轉）
+    }, false);*/
+	    
+		</script>
+	</head>
+	<body>
+	    <h1 id="goback" style=" position:absolute;margin:top left; top:5%; left:6%;cursor:pointer;font-family : Calligraffitti;">&larr; GoBack</h1>
+		<input type="radio" name="select" id="front" value=""/>
+		<label for="front" class="text" style = "display:none;"><img src="images/lips.png" width="80"
+			height="80" alt="Photo1"  style="margin-top :100; margin-left:80;"><h2 style="margin-top :-50; margin-left:170;">Lips</h2></label>
+		
+		<input type="radio" name="select" id="left" value=""/>
+		<label for="left" class="text" style = "display:none;"><img src="images/eyebrow.png" width="80"
+			height="80" alt="Photo2" style="margin-top :200; margin-left:80;"><h2 style="margin-top :-50; margin-left:170;">Eyebrow</h2></label>
+		
+		<input type="radio" name="select" id="right" value=""/>
+		<label for="right" class="text" style = "display:none;"><img src="images/eyeshadow.png" width="80"
+			height="80" alt="Photo3" style="margin-top :300; margin-left:80;"><h2 style="margin-top :-50; margin-left:170;">Eyeshadow</h2></label>
+		
+		<input type="radio" name="select" id="top" value=""/>
+		<label for="top" class="text" style = "display:none;"><img src="images/blush.png" width="80"
+			height="80" alt="Photo1" style="margin-top :100; margin-left:1000;"><h2 style="margin-top :-50; margin-left:890;">Blush</h2></label>
+		
+		<input type="radio" name="select" id="bottom" value=""/>
+		<label for="bottom" class="text" style = "display:none;"><img src="images/Bronzer.png" width="80"
+			height="80" alt="Photo1" style="margin-top :200; margin-left:1000;"><h2 style="margin-top :-50; margin-left:890;">Bronzer</h2></label>
+		
+		<input type="radio" name="select" id="back" value=""/>
+		<label for="back" class="text" style = "display:none;"><img src="images/fundation.png" width="80"
+			height="80" alt="Photo1" style="margin-top :300; margin-left:1000;"><h2 style="margin-top :-50; margin-left:890;">Fundation</h2></label>
+		
+		<div class="btn"></div>
+		
+		<div id ="showa" style="display:none;" style = "right = '600'"><iframe src="https://www.google.com.tw/"  width = "750px"  height="550px">
+        </iframe>
+        </div>
+		<div id = "views" class="view" style = "display:none;">
+			
+			<div id = "boxs" class="box" >
+				<div id = "boxfront" class="face box_front" style="overflow-y:auto;">	
+					<div class="imgOfBox" id="imglips" >
+					    <a href="https://www.youtube.com/watch?v=LDSwW8etxZA" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/LDSwW8etxZA/mqdefault_6s.webp?du=3000&sqp=CIDeo9kF&rs=AOn4CLB8wme9bvvYlYzbijKBpGX-v7OgDg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=4luY_RZ1aeU" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/4luY_RZ1aeU/mqdefault_6s.webp?du=3000&sqp=CLXAo9kF&rs=AOn4CLAK9maRKmduASGg17Rf1wkNpTTvWg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=MPb_9TLzSNY" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/MPb_9TLzSNY/mqdefault_6s.webp?du=3000&sqp=CNK5o9kF&rs=AOn4CLBdmfFIynBB_N8pzLPmAiwFENHznw" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=4IfBBuctkx4" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/4IfBBuctkx4/mqdefault_6s.webp?du=3000&sqp=CObjo9kF&rs=AOn4CLBXd4T_giEc4BIjvMcrMsTgB4bdHg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=DamJ_40JWwc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/DamJ_40JWwc/mqdefault_6s.webp?du=3000&sqp=CIvQo9kF&rs=AOn4CLBvKJKHamY17GkCga6IQpYqgw5rCA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=fE_iG236jT0" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/fE_iG236jT0/mqdefault_6s.webp?du=3000&sqp=CMLWo9kF&rs=AOn4CLC9UjKrRpxTnJYtL6N6n2MQgdqTNg" width="150"
+			             height="90" alt="Photo1" ></a>
+					</div>
+				</div>
+				<div id = "boxleft" class="face box_left" >
+						<div class="imgOfBox" id= "imgbronzer">
+					    <a href="https://www.youtube.com/watch?v=s_OzUKSLA0U" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/s_OzUKSLA0U/mqdefault_6s.webp?du=3000&sqp=CN3so9kF&rs=AOn4CLDMsOLp7zhBsYqSQVHjGX7dJAXfrg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=t0vS-VGbryE" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/t0vS-VGbryE/mqdefault_6s.webp?du=3000&sqp=COSzo9kF&rs=AOn4CLCRjwl2gn0MeIAdNILvSg_ahjuhwA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=xVu1fqXLsEc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/xVu1fqXLsEc/mqdefault_6s.webp?du=3000&sqp=CIXpo9kF&rs=AOn4CLDvWWlUR8uk1drx8c4SNKobGKVYoQ" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=Q5fBhNZJXzU" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/Q5fBhNZJXzU/mqdefault_6s.webp?du=3000&sqp=CPvbo9kF&rs=AOn4CLCQz_4psF9jv4hvyXS4plMom--iHQ" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=LwGogHTLY1A" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/LwGogHTLY1A/mqdefault_6s.webp?du=3000&sqp=CKDJo9kF&rs=AOn4CLAeU3qRBMtCl9cilLlKcJh1NcvU-A" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=36MOhIFW75o" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/36MOhIFW75o/mqdefault_6s.webp?du=3000&sqp=CJbMo9kF&rs=AOn4CLC9FE8L1lwhBbkMk70Kahoq6jBUXg" width="150"
+			             height="90" alt="Photo1" ></a>
+					</div>
+					</div>
+				<div id = "boxright" class="face box_right" >
+                    <div class="imgOfBox"  id="imgblush">
+					    <a href="https://www.youtube.com/watch?v=eo0ncN28cs8" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/eo0ncN28cs8/mqdefault_6s.webp?du=3000&sqp=COHCo9kF&rs=AOn4CLBly-e6zjT2OLiyGQp6Y4YrgRJ9Kg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=Od2kVrtu5_o" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/Od2kVrtu5_o/mqdefault_6s.webp?du=3000&sqp=CITvo9kF&rs=AOn4CLBNC1OfQkIkubNmpRJWg8BL-J8D8Q" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=u3Ph6tPZ_Uo" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/u3Ph6tPZ_Uo/mqdefault_6s.webp?du=3000&sqp=CLLho9kF&rs=AOn4CLBO_1q5dLWRsSN2AtNHFRX2lUZTTA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=0agq6aSGSDE" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/0agq6aSGSDE/mqdefault_6s.webp?du=3000&sqp=CMbMo9kF&rs=AOn4CLAwxeYsYi1AEnfkeufQfNZIXCJi_A" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=aTqQrAcpq0c" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/aTqQrAcpq0c/mqdefault_6s.webp?du=3000&sqp=CNrUo9kF&rs=AOn4CLCmtlSzDWivr3vpNsRRwslidK_MSQ" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=mKYMERSFIbo" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/mKYMERSFIbo/mqdefault_6s.webp?du=3000&sqp=CObxo9kF&rs=AOn4CLD6uz8Kbd6mI5bdKgir-ANIsX3MrQ" width="150"
+			             height="90" alt="Photo1" ></a>
+					</div>
+			</div>
+				<div id = "boxtop" class="face box_top">
+				<div class="imgOfBox"  id="imgeyebrow">
+					    <a href="https://www.youtube.com/watch?v=ZmWwZ3VFA0Y" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/ZmWwZ3VFA0Y/mqdefault_6s.webp?du=3000&sqp=CLLGotkF&rs=AOn4CLAc377gmEL7QLtzCUClyYeZ843hSw" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=LgepzZZz9Is" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/LgepzZZz9Is/mqdefault_6s.webp?du=3000&sqp=CLSQo9kF&rs=AOn4CLAna6NY0FV5XUQLNq7NvyYv5ZLlag" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=We9vugTA2sc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/We9vugTA2sc/mqdefault_6s.webp?du=3000&sqp=CI-Jo9kF&rs=AOn4CLAkmbwMhhmYThug1CcJm_-Wx696QQ" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=DXyWeGZxYck" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/DXyWeGZxYck/mqdefault_6s.webp?du=3000&sqp=CODwotkF&rs=AOn4CLDPlOJ8A814ycj8ZpcIH-ybPIjoHg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=2MWNIUXTxho" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/2MWNIUXTxho/mqdefault_6s.webp?du=3000&sqp=CICmo9kF&rs=AOn4CLCpb-cgQlVLME8Re6KWOiaF_BYTtA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=SWVY8Ff7CDQ" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/SWVY8Ff7CDQ/mqdefault_6s.webp?du=3000&sqp=CPT1otkF&rs=AOn4CLALPmsHoxNLvBllJXoKFE6QmeEw5g" width="150"
+			             height="90" alt="Photo1" ></a>
+					</div>
+				</div>
+				<div id = "boxbottom" class="face box_bottom">
+				<div class="imgOfBox"  id="imgeyeshadow">
+					    <a href="https://www.youtube.com/watch?v=9MKnWGTbySw" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/9MKnWGTbySw/mqdefault_6s.webp?du=3000&sqp=CLzBo9kF&rs=AOn4CLDfDY-IcRsyXXqJ18Pyms0rHh2a5Q" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=N9WK7fD_UHc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/N9WK7fD_UHc/mqdefault_6s.webp?du=3000&sqp=CJreo9kF&rs=AOn4CLBvXOD5hsEunvfAz9xDit8HCT6p5g" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=cLZLStVdHzo" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/cLZLStVdHzo/mqdefault_6s.webp?du=3000&sqp=CO7no9kF&rs=AOn4CLBa4mgsOKvou28_GDJTv5j5NthQTA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=0vSRvivZOq0" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/0vSRvivZOq0/mqdefault_6s.webp?du=3000&sqp=CNzZo9kF&rs=AOn4CLAIK2tdYi9L00eocm8yRMO6FzN5Hg" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=S5UREB28PWs" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/S5UREB28PWs/mqdefault_6s.webp?du=3000&sqp=CL-mo9kF&rs=AOn4CLAIwGQtXu9wFZHrXo1h2yIlePr50A" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=IjLG2h4wKFk" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/IjLG2h4wKFk/mqdefault_6s.webp?du=3000&sqp=CMrho9kF&rs=AOn4CLApf3PQcpVX1ZJITWmWi4oLsq2sfA" width="150"
+			             height="90" alt="Photo1" ></a>
+					</div>
+				</div>
+				<div id = "boxback" class="face box_back">
+				<div class="imgOfBox"  id="imgfundation">
+					    <a href="https://www.youtube.com/watch?v=0JES5d2Zl9I" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/0JES5d2Zl9I/mqdefault_6s.webp?du=3000&sqp=CN7qo9kF&rs=AOn4CLC3WP0XB0AEZMIA49QkYT2kQAEnAA" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=8SHotKNhUxc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/8SHotKNhUxc/mqdefault_6s.webp?du=3000&sqp=CPHYo9kF&rs=AOn4CLDTLZn5KilFCisk0pvFpZbtW7Yssw" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=0s-4jHAn_7Y" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/0s-4jHAn_7Y/mqdefault_6s.webp?du=3000&sqp=CP7ro9kF&rs=AOn4CLBqPhWtdewt1y8qX5EsKmj50-Va2g" width="150"
+			             height="90" alt="Photo1" ></a>
+						<a href="https://www.youtube.com/watch?v=zsGyamWLshc" target="_blank" id = "01"><img src="https://i.ytimg.com/an_webp/zsGyamWLshc/mqdefault_6s.webp?du=3000&sqp=COnio9kF&rs=AOn4CLCmRGd104umw2isAR-wFoEPm13w-Q" width="150"
+			             height="90" alt="Photo1" ></a>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
